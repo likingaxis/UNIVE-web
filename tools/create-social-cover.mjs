@@ -15,13 +15,13 @@ const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vie
 <defs><clipPath id="art"><rect x="650" y="119" width="491" height="372" rx="18"/></clipPath></defs>
 <rect width="1200" height="630" fill="#f7f3e9"/>
 <text x="72" y="206" font-family="Georgia,serif" font-size="112" font-weight="700" fill="#25243a">UNIVE</text>
-<text x="77" y="292" font-family="Segoe UI,Arial,sans-serif" font-size="43" fill="#35334b">Gli appunti di</text>
-<text x="77" y="350" font-family="Segoe UI,Arial,sans-serif" font-size="43" font-weight="700" fill="#35334b">Luca Gugliotta.</text>
+<text x="77" y="292" font-family="Segoe UI,Arial,sans-serif" font-size="38" fill="#35334b">Sito con i miei appunti</text>
+<text x="77" y="350" font-family="Segoe UI,Arial,sans-serif" font-size="43" font-weight="700" fill="#35334b">Luca</text>
 <path d="M79 401h82" stroke="#9773bb" stroke-width="5" stroke-linecap="round"/>
 <text x="77" y="466" font-family="Segoe UI,Arial,sans-serif" font-size="27" fill="#4d5550">Teoria, esercizi e laboratori.</text>
 <image href="${image}" x="650" y="119" width="491" height="372" clip-path="url(#art)"/>
 <text x="77" y="571" font-family="Segoe UI,Arial,sans-serif" font-size="22" fill="#526b5b">Informatica · Tor Vergata</text>
 </svg>`;
 fs.writeFileSync('quartz/static/unive-social.svg',svg);
-await sharp(Buffer.from(svg)).png().toFile('quartz/static/unive-social-v1.png');
+await sharp(Buffer.from(svg)).png().toFile('quartz/static/unive-social-v2.png');
 console.log('Copertina sociale generata: 1200 × 630.');

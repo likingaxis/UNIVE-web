@@ -15,8 +15,9 @@ export default (() => {
     const titleSuffix = cfg.pageTitleSuffix ?? ""
     const title =
       (fileData.frontmatter?.title ?? i18n(cfg.locale).propertyDefaults.title) + titleSuffix
+    const socialTitle = fileData.slug === "index" ? "UNIVE — Sito con i miei appunti · Luca" : title
     const description = fileData.slug === "index"
-      ? "Gli appunti di Informatica di Luca Gugliotta: teoria, esercizi e laboratori, raccolti durante il percorso a Tor Vergata."
+      ? "Sito con i miei appunti di Informatica: teoria, esercizi e laboratori. Luca · Tor Vergata."
       :
       fileData.frontmatter?.socialDescription ??
       fileData.frontmatter?.description ??
@@ -34,7 +35,7 @@ export default (() => {
       fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
 
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some((e) => e.name === "CustomOgImages")
-    const ogImageDefaultPath = `https://${cfg.baseUrl}/static/unive-social-v1.png`
+    const ogImageDefaultPath = `https://${cfg.baseUrl}/static/unive-social-v2.png`
 
     const coreStylesheet = css[0]?.content
     const coreScript = js.find(
@@ -63,13 +64,13 @@ export default (() => {
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <meta property="og:site_name" content={cfg.pageTitle}></meta>
-        <meta property="og:title" content={title} />
+        <meta property="og:title" content={socialTitle} />
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
+        <meta name="twitter:title" content={socialTitle} />
         <meta name="twitter:description" content={description} />
         <meta property="og:description" content={description} />
-        <meta property="og:image:alt" content="UNIVE — gli appunti di Luca Gugliotta, con Winnie the Pooh sotto la pioggia." />
+        <meta property="og:image:alt" content="UNIVE — Sito con i miei appunti. Luca, con Winnie the Pooh sotto la pioggia." />
 
         {!usesCustomOgImage && (
           <>

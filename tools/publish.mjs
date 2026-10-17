@@ -33,7 +33,7 @@ try {
   commitPaths(source,report.control_files,'Aggiorna gli appunti selezionati per il sito');
   // Only the exporter-selected notes and their assets can enter the source commit.
   git(source,['push','origin','v4'],{stdio:'inherit'});
-  const sitePaths=['.gitignore','.github/workflows/deploy.yml','package.json','package-lock.json','quartz.config.yaml','quartz/util/glob.ts','quartz/components/Head.tsx','quartz/static/icon.png','quartz/static/icon.svg','quartz/static/unive-social-v1.png','quartz/static/unive-social.svg','README.md','DEMO.md','GUIDA-PUBBLICAZIONE.md','pubblica.cmd',...fs.readdirSync('tools').filter(n=>n.endsWith('.mjs')).map(n=>'tools/'+n),'publication/selection.json','publication/CLASSIFICAZIONE.md',...git(root,['diff','--cached','--name-only','-z']).split('\0').filter(p=>p.startsWith('content/'))];
+  const sitePaths=['.gitignore','.github/workflows/deploy.yml','package.json','package-lock.json','quartz.config.yaml','quartz/util/glob.ts','quartz/components/Head.tsx','quartz/static/icon.png','quartz/static/icon.svg','quartz/static/unive-social-v1.png','quartz/static/unive-social-v2.png','quartz/static/unive-social.svg','README.md','DEMO.md','GUIDA-PUBBLICAZIONE.md','pubblica.cmd',...fs.readdirSync('tools').filter(n=>n.endsWith('.mjs')).map(n=>'tools/'+n),'publication/selection.json','publication/CLASSIFICAZIONE.md',...git(root,['diff','--cached','--name-only','-z']).split('\0').filter(p=>p.startsWith('content/'))];
   const changed=commitPaths(root,sitePaths,'Pubblica la selezione degli appunti e il flusso di aggiornamento');
   git(root,['push','origin','codex/site'],{stdio:'inherit'});
   if(!changed) {
