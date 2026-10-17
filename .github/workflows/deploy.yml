@@ -24,6 +24,8 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Prepara i plugin Quartz
         run: node node_modules/tsx/dist/cli.mjs quartz/plugins/loader/install-plugins.ts
+      - name: Verifica le regole di pubblicazione
+        run: npm run test:publication
       - name: Seleziona gli appunti dalla repository originale
         run: node tools/export-notes.mjs --fetch
       - name: Genera il sito

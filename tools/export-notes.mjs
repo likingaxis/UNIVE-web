@@ -52,7 +52,12 @@ for(const course of courses) for(const note of course.notes) {
 for(const p of files.filter(eligible)) {
   if(chosen.has(p)) continue;
   const parsed = parse(p);
-  if(typeof parsed.meta.publish === 'boolean') controlFiles.add(p);
+  if(parsed.meta.publish === true) controlFiles.add(p);
+  else if(parsed.meta.publish === false && !remote) {
+    // A withdrawal updates a previously published source; an unrelated private
+    // note with publish:false must never be added to a public source commit.
+    try {if(/^publish:\s*true\s*$/m.test(git(['show',`HEAD:${p}`],{stdio:['pipe','pipe','ignore']})))controlFiles.add(p);}catch{}
+  }
   if(parsed.meta.publish !== true) continue;
   let course = courses.find(c=>p.startsWith(c.source_folder+'/'));
   if(!course) {
@@ -145,7 +150,7 @@ for(const c of courses) {
   }
   write(c.output+'/index.md',fm(c.title,body));
 }
-let home='Appunti del percorso di Informatica all’Università Ca’ Foscari: sintesi, esercizi e laboratori, organizzati per corso.\n\nLa raccolta è una selezione degli appunti personali e può contenere errori o parti incomplete.\n';
+let home='Appunti della laurea triennale in Informatica: sintesi, esercizi e laboratori, organizzati per corso.\n\nLa raccolta è una selezione degli appunti personali e può contenere errori o parti incomplete.\n';
 for(const [section,title] of [['triennale/primo-anno','Primo anno'],['triennale/secondo-anno','Secondo anno'],['triennale/terzo-anno','Terzo anno'],['progetti','Progetti e laboratori']]) {
   const subset=courses.filter(c=>c.output.startsWith(section+'/') && [...chosen.values()].some(n=>n.course===c));
   const links=subset.map(c=>`- [${c.title}](${c.output}/index.md)`).join('\n');
