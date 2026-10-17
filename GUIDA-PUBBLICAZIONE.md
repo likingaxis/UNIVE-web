@@ -10,6 +10,8 @@ Il comando genera e controlla l'intero sito prima di inviare le modifiche. Se un
 
 ## Scegliere una nuova nota
 
+La homepage segue `content/index.md` del vault: puoi modificare lì presentazione, GIF e indici, poi avviare `pubblica.cmd`. I collegamenti agli indici dei corsi e degli anni vengono adattati ai percorsi del sito. Le esclusioni di Tesi e Magistrale valgono anche per i collegamenti e gli allegati della homepage.
+
 In Obsidian aggiungi la proprietà **publish** di tipo **Checkbox** e spuntala. In modalità sorgente corrisponde a:
 
 ```yaml

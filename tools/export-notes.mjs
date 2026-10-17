@@ -85,6 +85,12 @@ for(const p of files.filter(p=>p.startsWith('content/') && !forbidden(p))) {
   }
 }
 const outputs = new Map(), assets = new Map(), issues=[];
+const indexAliases = {
+  'IS INDICE':'ingegneria-software','IA INDICE':'intelligenza-artificiale',
+  'BIG DATA INDICE':'big-data','PROGRAMMAZIONE WEB INDICE':'programmazione-web',
+  'VULNERABILITÀ INDICE':'vulnerabilita','INFORMATION RETRIEVAL INDICE':'information-retrieval',
+  'CALCOLO NUMERICO INDICE':'calcolo-numerico',
+};
 function write(p, text) {outputs.set(p,Buffer.isBuffer(text)?text:Buffer.from(text));}
 const fm = (title,body) => `---\n${YAML.stringify({title}).trim()}\n---\n\n${body}\n`;
 const escapeLabel = s => s.replace(/[\[\]|]/g,'');
@@ -103,6 +109,10 @@ function link(raw, label, embed, note) {
   const anchorAt=target.indexOf('#');const anchor=anchorAt<0?'':target.slice(anchorAt);target=anchorAt<0?target:target.slice(0,anchorAt);
   if(!target) return null;
   let output;
+  const indexName=path.posix.basename(target).replace(/\.md$/i,'').toUpperCase();
+  if(indexAliases[indexName]) output=courses.find(c=>c.id===indexAliases[indexName])?.output+'/index';
+  if(indexName==='ANNO 1 INDICE')output='triennale/primo-anno/index';
+  if(indexName==='ANNO 2 INDICE')output='triennale/secondo-anno/index';
   const lower=target.toLowerCase();
   if(lower==='logica indice') output=courses.find(c=>c.id==='logica')?.output+'/index';
   else if(lower==='sistemi operativi lez.4-5-6-7') output=[...chosen.values()].find(n=>n.source.endsWith('/LISTA ARGOMENTI CRUX.md'))?.output;
@@ -118,7 +128,10 @@ function link(raw, label, embed, note) {
     }
     output=assets.get(resolved);
   }
-  const display=escapeLabel(label || path.posix.basename(target).replace(/\.md$/i,''));
+  const homeAlt=note.source==='content/index.md' && embed
+    ? ({'tumblr_527e9e177b4cc0c2e94d2d9f98ae57ed_4ffd3b4f_500.webp':'Winnie the Pooh sotto la pioggia','Screenshot 2026-03-09 123930.png':'Orario delle lezioni e organizzazione settimanale'})[path.posix.basename(target)]
+    : undefined;
+  const display=escapeLabel(homeAlt || label || path.posix.basename(target).replace(/\.md$/i,''));
   if(!output) {
     issues.push({source:note.source,target,status:resolved?'escluso':'non_disponibile'});
     return embed ? `\n> Allegato non disponibile nell’archivio pubblicato: ${display}.\n` : `${display} (riferimento non disponibile)`;
@@ -127,7 +140,7 @@ function link(raw, label, embed, note) {
   // Markdown destinations in angle brackets support spaces and parentheses safely.
   return `${embed?'!':''}[${display}](<${relative}>)`;
 }
-for(const note of chosen.values()) {
+function rewrite(note) {
   const protectedText=[];
   let body=note.body.replace(/(^`{3,}[^`\n]*\n[\s\S]*?^`{3,}[ \t]*\r?$|^~{3,}[^~\n]*\n[\s\S]*?^~{3,}[ \t]*\r?$|\$\$[\s\S]*?\$\$|`{3}[^`\n]+`{3}|`[^`\n]+`|(?<!\\)\$[^\n$]*?(?<!\\)\$)/gm,s=>`\u0000${protectedText.push(s)-1}\u0000`);
   // A single pass prevents converted wikilinks being interpreted a second time.
@@ -136,9 +149,9 @@ for(const note of chosen.values()) {
     return link(target,label,!!mdBang,note)??all;
   });
   body=body.replace(/\u0000(\d+)\u0000/g,(_,i)=>protectedText[+i]);
-  // The published copy has a minimal frontmatter: no personal aliases or vault-only properties.
-  write(note.output+'.md',fm(note.title,body));
+  return body;
 }
+for(const note of chosen.values()) write(note.output+'.md',fm(note.title,rewrite(note)));
 const groups={principale:'Appunti e sintesi',lezioni:'Lezioni',supporto:'Materiale di supporto',esercizi:'Esercizi',laboratorio:'Laboratorio',dimostrazioni:'Dimostrazioni'};
 const collator=new Intl.Collator('it',{numeric:true,sensitivity:'base'});
 for(const c of courses) {
@@ -158,6 +171,12 @@ for(const [section,title] of [['triennale/primo-anno','Primo anno'],['triennale/
   home+=`\n## ${title}\n\n`+subset.map(c=>`- [${c.title}](${c.output}/index.md)`).join('\n')+'\n';
 }
 home+='\n---\n\n[Archivio degli appunti su GitHub](https://github.com/likingaxis/UNIVE/tree/v4) · Tema Primary per Quartz\n';
+if(fileSet.has('content/index.md')) {
+  controlFiles.add('content/index.md');
+  // Keep the vault homepage as the source of truth; only public destinations
+  // and heading levels change in the generated web copy.
+  home=rewrite({source:'content/index.md',output:'index',body:parse('content/index.md').body}).replace(/^(#{1,5}) /gm,'#$1 ');
+}
 write('index.md',fm('UNIVE — appunti di Informatica',home));
 write('triennale/index.md',fm('Laurea triennale','- [Primo anno](triennale/primo-anno/index.md)\n- [Secondo anno](triennale/secondo-anno/index.md)\n- [Terzo anno](triennale/terzo-anno/index.md)'));
 const outDir=path.join(root,'content');fs.mkdirSync(outDir,{recursive:true});
