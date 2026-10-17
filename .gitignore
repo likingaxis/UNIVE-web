@@ -16,3 +16,10 @@ quartz/cli/tui/dist/
 # Anteprima e verifiche locali
 .impeccable/
 .sites-runtime/
+
+# Copie generate dagli appunti: rigenerate prima del build
+/content/
+/.source-notes/
+/.publication-state.json
+/publication/export-report.json
+

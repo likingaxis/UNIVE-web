@@ -20,8 +20,12 @@
     "profile": "0x -D prof ./quartz/bootstrap-cli.mjs build --concurrency=1",
     "install-plugins": "npx tsx ./quartz/plugins/loader/install-plugins.ts",
     "prebuild": "npm run install-plugins",
-    "preview": "node quartz/bootstrap-cli.mjs build --serve --port 8088",
-    "build:demo": "node quartz/bootstrap-cli.mjs build"
+    "preview": "node tools/build-site.mjs --serve --port 8088",
+    "build:demo": "node tools/build-site.mjs",
+    "export:notes": "node tools/export-notes.mjs",
+    "build:site": "node tools/build-site.mjs",
+    "publish": "node tools/publish.mjs",
+    "test:publication": "node --test tools/export-notes.test.mjs"
   },
   "engines": {
     "npm": ">=10.9.2",

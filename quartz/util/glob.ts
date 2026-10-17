@@ -15,7 +15,9 @@ export async function glob(
     await globby(pattern, {
       cwd,
       ignore: ignorePatterns,
-      gitignore: true,
+      // The UNIVE exporter already selects every input. Generated content is
+      // intentionally untracked, but must remain visible to this build.
+      gitignore: process.env.UNIVE_GENERATED_CONTENT !== "1",
     })
   ).map(toPosixPath)
   return fps as FilePath[]
