@@ -1,0 +1,87 @@
+{
+  "sources": [
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/ALGORITMI LEZ.1.md",
+      "source_sha256": "2607a93d204cb23657c82bed7ff4aa59f4288e6d427ca63306cbc84a7d953487",
+      "kind": "note"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/ALGORITMI LEZ.2.md",
+      "source_sha256": "de5afeb36cceaa1c87a07c672b0c8988e65f6e50262ab9caba6572c8810f5210",
+      "kind": "note"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Cap1.pdf",
+      "source_sha256": "373aadb85c22ba5c54b97a9e4e44dbd0a7c9c04d14473e73dbc8b05c99c9a56f",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Introduzione_2024.pdf",
+      "source_sha256": "05c0b1a3e595087be1e7cfd0206939df92ea309969a45d85120d7abe4d0f4f2f",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241008175847.jpg",
+      "source_sha256": "8025db661bea3e9499fd64e00a269fc2a6ef41ee5242790fca12d8f6cc10677a",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241009153708.jpg",
+      "source_sha256": "c697e6595cd3a8ff0044aa804e9a834f672fabf6d9ecae72b05f94d4ade59f3a",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241009153904.jpg",
+      "source_sha256": "f6e6b387df37b160e94b7b7c821eb02951b5e8be51f452976e966f0f892696cc",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241009155632.jpg",
+      "source_sha256": "239fdbbc69d290cbd0027b821d86f6bfa4411310bd456d7713d97c1bd918615c",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241009164625.jpg",
+      "source_sha256": "3a166b812a8a338a9a2b739e70629686c490a805f10a61f09c4799838d09947f",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241009165440.jpg",
+      "source_sha256": "09ec641c4932a5c742eb01af128668232fa8d03acdcca05e5f64a1b0ca5ab4db",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241009175301.jpg",
+      "source_sha256": "23865dc5b32b645691fa9a73eff9bd92f088e6f869e4c220a264a425e26483d9",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241009183110.jpg",
+      "source_sha256": "7f61a5ee1d74eb25d79fcd10641ba613529c3642eece7d7526024cb11d4a3057",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20241009192241.png",
+      "source_sha256": "6a5016824379d6f5db20147d59c86f58cd8c522b634cf6eff1de10222ab0df90",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20250505094900.png",
+      "source_sha256": "d7c8966e7f739d919181ccd97c5815534dc0cc3d2751ea4c73f7cb365117f66e",
+      "kind": "asset"
+    },
+    {
+      "path": "UNI/Triennale/ANNO 2/ALGORITMI 1/fotoalg/Pasted image 20250505094922.png",
+      "source_sha256": "1ea432a5e15b1bc5f509719a01293c57fbc043ac6601cb908466138a60407707",
+      "kind": "asset"
+    }
+  ],
+  "unresolved": [],
+  "excluded": [
+    "UNI/Magistrale",
+    "**/TESI",
+    "**/DRAFT",
+    ".obsidian",
+    ".trash"
+  ]
+}

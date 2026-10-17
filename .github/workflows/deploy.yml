@@ -1,0 +1,47 @@
+name: Pubblica appunti su GitHub Pages
+
+on:
+  push:
+    branches: [codex/site]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Prepara i plugin Quartz
+        run: node node_modules/tsx/dist/cli.mjs quartz/plugins/loader/install-plugins.ts
+      - name: Genera il sito
+        run: npm run build:demo
+      - name: Verifica contenuti esclusi
+        run: node tools/verify-content.mjs
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Pubblica
+        id: deployment
+        uses: actions/deploy-pages@v4
